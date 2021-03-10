@@ -10,11 +10,10 @@ class NewReleaseAPI(object):
         self.client_id = client_id
         self.client_secret = client_secret
     
-    def auth(self):
+    def auth(self, client_id, client_secret):
         token_url = 'https://accounts.spotify.com/api/token'
         headers = {}
         data = {}
-
         payload = f"{client_id}:{client_secret}"
         payload_ascii = payload.encode('ascii')
         base64_byte = base64.b64encode(payload_ascii)
@@ -25,8 +24,10 @@ class NewReleaseAPI(object):
 
         req = requests.post(token_url, headers=headers, data=data)
         token = req.json()['access_token']
+        
+        return token
     
-    def releases(self, country=US, limit=10):
+    def releases(self, country='US', limit=10):
         auth = self.auth()
         new_rel_url = f'https://api.spotify.com/v1/browse/new-releases?country={country}&limit={limit}'
         headers = {
