@@ -11,7 +11,7 @@ class NewReleaseAPI(object):
         self.client_secret = client_secret
     
     def auth(self):
-        token_url = https://accounts.spotify.com/api/token
+        token_url = 'https://accounts.spotify.com/api/token'
         headers = {}
         data = {}
 
@@ -27,4 +27,11 @@ class NewReleaseAPI(object):
         token = req.json()['access_token']
     
     def releases(self, country=US, limit=10):
-        pass
+        auth = self.auth()
+        new_rel_url = f'https://api.spotify.com/v1/browse/new-releases?country={country}&limit={limit}'
+        headers = {
+            "Authorization": "Bearer " + auth.token
+        }
+        results = requests.get(url=new_rel_url, headers=headers)
+
+        print(json.dumps(results.json()))
