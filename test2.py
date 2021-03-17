@@ -36,14 +36,23 @@ class FilterRelease(SpotifyAuth):
     
     def filtered(self):
         import random
+        import itertools
         ri = random.randint(0,9)
         release_results = super().server_auth(country='US', limit=10)
+        artists = release_results['albums']['items'][ri]['artists']
         
+        artist_list = []
+        for d in artists:
+            for v,l in d.items():
+                artist_list.append(l)
+
+        f_artist = artist_list[3]
         name = release_results['albums']['items'][ri]['name']
         release_date = release_results['albums']['items'][ri]['release_date']
         uri = release_results['albums']['items'][ri]['uri']
-
+        
         return {
+            "Artist": f_artist,
             "name": name,
             "release date": release_date,
             "Spotify URI": uri
