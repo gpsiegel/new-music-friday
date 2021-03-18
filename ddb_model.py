@@ -8,12 +8,12 @@ class DDBModel:
         table = ddb.Table('NRF')
         id = uuid.uuid4()
 
-        new_release = {
-            'id': id,
-            'Artist': artist,
-            'Name': name,
-            'Release_Date': release_date,
-            'Spotify_URI': uri
-        }
+        new_release = table.put_item({
+            "id":  id,
+            "Artist": artist,
+            "Name": name,
+            "Release_Date": release_date,
+            "Spotify_URI": uri
+        })
 
-        table.put_item(Item=new_release)
+        return new_release
