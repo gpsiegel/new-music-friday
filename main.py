@@ -2,7 +2,6 @@ import requests
 import json
 import boto3
 import uuid
-import os
 
 from id import *
 from api import FilterRelease
