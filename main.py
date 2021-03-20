@@ -2,10 +2,10 @@ import requests
 import json
 import boto3
 import uuid
+import os
 
 from id import *
 from api import FilterRelease
-
 
 def main():
     #Instantiating the Spotify API
@@ -25,7 +25,10 @@ def main():
     uri = post[3]
 
     #ddb insert
-    ddb = boto3.resource('dynamodb')
+    ddb = boto3.resource('dynamodb', \
+        aws_access_key_id=AWS_KEY, \
+        aws_secret_access_key=AWS_SECRET_KEY, \
+        region_name="us-east-1")
     table = ddb.Table('NRF')
     id = str(uuid.uuid4())
 
