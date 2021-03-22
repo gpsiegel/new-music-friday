@@ -21,7 +21,7 @@ def main():
     artist = post[0]
     name = post[1]
     release_date = post[2]
-    uri = post[3]
+    url = post[3]
 
     #ddb insert
     ddb = boto3.resource('dynamodb', \
@@ -36,7 +36,7 @@ def main():
         "Artist": artist,
         "Name": name,
         "Release_Date": release_date,
-        "Spotify_URI": uri
+        "Spotify_URL": url
     })
 
     return new_release
