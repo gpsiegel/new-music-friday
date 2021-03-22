@@ -49,11 +49,11 @@ class FilterRelease(SpotifyAuth):
         f_artist = artist_list[3]
         name = release_results['albums']['items'][ri]['name']
         release_date = release_results['albums']['items'][ri]['release_date']
-        uri = release_results['albums']['items'][ri]['uri']
+        url = release_results['albums']['items'][ri]['external_urls']['spotify']
         
         return {
             "Artist": f_artist,
             "name": name,
             "release date": release_date,
-            "Spotify URI": uri
+            "Spotify URL": url
         }
