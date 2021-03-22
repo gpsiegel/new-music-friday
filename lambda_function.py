@@ -26,7 +26,7 @@ def lambda_handler(event, context):
             d['Artist'] = r['dynamodb']['NewImage']['Artist']['S']
             d['Name'] = r['dynamodb']['NewImage']['Name']['S']
             d['Release_Date'] = r['dynamodb']['NewImage']['Release_Date']['S']
-            d['Spotify_URI'] = r['dynamodb']['NewImage']['Spotify_URI']['S']
+            d['Spotify_URL'] = r['dynamodb']['NewImage']['Spotify_URL']['S']
 
             resp['Items'].append(d)
     
@@ -38,10 +38,10 @@ def lambda_handler(event, context):
     artist = process[0]
     name = process[1]
     date = process[2]
-    uri = process[3]
+    url = process[3]
     
     subject = f"New Music Fridays - {today}"
-    message = f"{artist} just released {name} on {date}! Check it out at {uri}"
+    message = f"{artist} just released {name} on {date}! Check it out at {url}"
     
     pub = sns.publish(
         TopicArn=SNS_TOPIC,
